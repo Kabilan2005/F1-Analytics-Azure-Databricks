@@ -1,0 +1,45 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": { "type": "string", "defaultValue": "F1-ADFservice" },
+        "F1_storage_accountKey": { "type": "secureString" },
+        "AzureDatabricks1_properties_typeProperties_existingClusterId": { "type": "string" },
+        "F1_storage_properties_typeProperties_url": { "type": "string" },
+        "tr_process_f1_data_properties_pipeline_parameters_p_window_end_date": { "type": "string" },
+        "containerUri": { "type": "string" },
+        "containerSasToken": { "type": "string" }
+    },
+    "resources": [
+        {
+            "name": "F1-ADFservice_ArmTemplate_0",
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2024-03-01",
+            "properties": {
+                "mode": "incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "factoryName": {
+                        "value": "[parameters('factoryName')]"
+                    },
+                    "F1_storage_accountKey": {
+                        "value": "[parameters('F1_storage_accountKey')]"
+                    },
+                    "AzureDatabricks1_properties_typeProperties_existingClusterId": {
+                        "value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+                    },
+                    "F1_storage_properties_typeProperties_url": {
+                        "value": "[parameters('F1_storage_properties_typeProperties_url')]"
+                    },
+                    "tr_process_f1_data_properties_pipeline_parameters_p_window_end_date": {
+                        "value": "[parameters('tr_process_f1_data_properties_pipeline_parameters_p_window_end_date')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}
